@@ -1,0 +1,14 @@
+{
+	"name": "websocket-demo",
+	"version": "0.0.1",
+	"description": "This is a websocket demo project using NestJs.",
+	"author": "Chunlin Wang<kazami0083@gmail.com>",
+	"private": true,
+	"license": "UNLICENSED",
+	"devDependencies": {
+		"husky": "^9.0.11"
+	},
+	"scripts": {
+		"prepare": "husky"
+	}
+}

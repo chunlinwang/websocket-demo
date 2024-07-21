@@ -1,0 +1,14 @@
+#!/bin/bash
+
+CONTAINER_NAME="websocket-demo"
+
+if docker ps --format '{{.Names}}' | grep -Eq "^${CONTAINER_NAME}$";
+then
+    echo "Docker has been started. The tests will be launched!"
+    make lint && make test
+else
+  echo "Docker is down, please wait a moment for Docker to start!"
+  make up && sleep 20
+  echo "The tests will be launched!"
+  make lint && make test
+fi

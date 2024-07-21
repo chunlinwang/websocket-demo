@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <title>{{title}}</title>
+    <script src="https://cdn.socket.io/4.3.2/socket.io.min.js" crossorigin="anonymous"></script>
+    <script>
+      const socket = io('http://localhost:3001');
+      socket.on('connect', function() {
+        console.log('Connected');
+
+        socket.emit('event1', { test: 'test' });
+        socket.emit('event2', 0, response =>
+          console.log('Event2:', response),
+        );
+      });
+      socket.on('event1', function(data) {
+        console.log('event1', data);
+      });
+      socket.on('event2', function(data) {
+        console.log('event2', data);
+      });
+      socket.on('orderbook', function(data) {
+        const elem = document.getElementById("orderBook");
+        elem.innerText = JSON.stringify(data);
+      });
+      socket.on('exception', function(data) {
+        console.log('event', data);
+      });
+      socket.on('disconnect', function() {
+        console.log('Disconnected');
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1>Web Socket Demo</h1>
+    <span id="orderBook"></span>
+  </body>
+</html>

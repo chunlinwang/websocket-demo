@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+  app:
+    container_name: websocket-demo
+    build:
+      context: app
+      target: dev
+      args:
+        NODE_VERSION: 22.0.0
+        ALPINE_VERSION: 3.19
+    environment:
+      # the configs of the application, we can also use .env to realize it.
+      BINANCE_WS_URL: 'wss://stream.binance.com:9443/ws/btcusdt@depth'
+      HUOBI_WS_URL: 'wss://api.huobi.pro/ws'
+      KRAKEN_WS_URL: 'wss://ws.kraken.com/v2'
+      BINANCE_RECONNECT_INTERVAL: 5000 #5s
+      HUOBI_RECONNECT_INTERVAL: 5000 #5s
+      KRAKEN_RECONNECT_INTERVAL: 5000 #5s
+      WEB_SERVICE_PORT: 3000
+      WEB_SERVICE_HOST: 0.0.0.0 # bind any ip
+    networks:
+      - app
+    tty: true
+    ports:
+      - "3000:3000"
+      - "3001:3001"
+    volumes:
+      - ./app:/app
+    command: bash -c "pnpm install && pnpm start:dev"
+
+networks:
+  app:
