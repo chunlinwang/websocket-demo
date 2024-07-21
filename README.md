@@ -48,7 +48,7 @@ I fetch all these data resource form websocket. This is the documents:
 - Houbi https://huobiapi.github.io/docs/spot/v1/en/#market-depth
 - Kraken https://docs.kraken.com/websockets-v2/#book
 
-I used the Nestjs Websocket Gateways to integrate them.
+I used the Nestjs Websocket to integrate them.
 
 ## Observability (Logging)
 In this project, I used pino-logger to generate logs in JSON format. 
@@ -115,7 +115,7 @@ Docker has been started. The tests will be launched!
 
 ## How to integrate new provider
 Ideally, we should use always websocket to fetch the data.
-All classes should inherit an abstract class `OrderBookWebSocketGatewayAbstract`.
+All classes should inherit an abstract class `OrderBookWebSocketAbstract`.
 If you want to check the details, please read [this doc](app/src/orderbook/websockets/README.md).
 
 ## Deploy this project to the production.
