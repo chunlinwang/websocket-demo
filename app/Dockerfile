@@ -4,12 +4,9 @@ FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} as dev
 
 RUN apk update && apk add build-base libc6-compat gcompat curl bash
 
-RUN npm install -g pnpm @nestjs/cli
-
-RUN npm install --global pnpm@latest \
-  && SHELL=bash pnpm setup \
-  && source /root/.bashrc \
-  && pnpm config set store-dir /root/.local/share/pnpm/store
+RUN corepack enable && \
+    corepack prepare pnpm@latest-9 --activate && \
+    pnpm config set store-dir ~/.pnpm-store
 
 COPY ./ /app
 
