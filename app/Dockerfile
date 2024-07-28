@@ -8,6 +8,8 @@ RUN corepack enable && \
     corepack prepare pnpm@latest-9 --activate && \
     pnpm config set store-dir ~/.pnpm-store
 
+RUN npm install -g @nestjs/cli
+
 COPY ./ /app
 
 WORKDIR /app
@@ -19,7 +21,7 @@ FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} as build
 
 RUN apk update && apk add build-base libc6-compat gcompat curl bash
 
-RUN npm install -g pnpm @nestjs/cli
+RUN npm install -g @nestjs/cli
 
 RUN npm install --global pnpm@latest \
   && SHELL=bash pnpm setup \
